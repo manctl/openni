@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -129,7 +133,11 @@ namespace xn
 		 *
 		 * @param	ppData		[in]	A pointer to the data member of the meta data object.
 		 */
+#if MANCTL_CHANGES
+		inline OutputMetaData(const XnUInt8** ppData) : m_pAllocatedData(NULL), m_ppData(ppData), m_nAllocatedSize(0)
+#else
 		inline OutputMetaData(const XnUInt8** ppData) : m_ppData(ppData), m_nAllocatedSize(0), m_pAllocatedData(NULL)
+#endif
 		{
 			xnOSMemSet(&m_output, 0, sizeof(XnOutputMetaData));
 		}
@@ -1358,8 +1366,8 @@ namespace xn
 		}
 
 	private:
-		XnNodeQuery* m_pQuery;
 		XnBool m_bAllocated;
+		XnNodeQuery* m_pQuery;
 	};
 
 	//---------------------------------------------------------------------------
@@ -4293,10 +4301,14 @@ namespace xn
 			pSkeletonCookie->endHandler = CalibrationEndCB;
 			pSkeletonCookie->pUserCookie = pCookie;
 
+#ifdef _WIN32
 #pragma warning (push)
 #pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			nRetVal = xnRegisterCalibrationCallbacks(GetHandle(), CalibrationStartBundleCallback, CalibrationEndBundleCallback, pSkeletonCookie, &pSkeletonCookie->hCallback);
+#ifdef _WIN32
 #pragma warning (pop)
+#endif
 			if (nRetVal != XN_STATUS_OK)
 			{
 				xnOSFree(pSkeletonCookie);
@@ -4314,10 +4326,14 @@ namespace xn
 		inline void XN_API_DEPRECATED("Please use UnregisterFromCalibrationStart/Complete") UnregisterCalibrationCallbacks(XnCallbackHandle hCallback)
 		{
 			SkeletonCookie* pSkeletonCookie = (SkeletonCookie*)hCallback;
+#ifdef _WIN32
 #pragma warning (push)
 #pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			xnUnregisterCalibrationCallbacks(GetHandle(), pSkeletonCookie->hCallback);
+#ifdef _WIN32
 #pragma warning (pop)
+#endif
 			xnOSFree(pSkeletonCookie);
 		}
 
@@ -4597,10 +4613,14 @@ namespace xn
 			pPoseCookie->endHandler = PoseEndCB;
 			pPoseCookie->pPoseCookie = pCookie;
 
+#ifdef _WIN32
 #pragma warning (push)
 #pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			nRetVal = xnRegisterToPoseCallbacks(GetHandle(), PoseDetectionStartBundleCallback, PoseDetectionStartEndBundleCallback, pPoseCookie, &pPoseCookie->hCallback);
+#ifdef _WIN32
 #pragma warning (pop)
+#endif
 			if (nRetVal != XN_STATUS_OK)
 			{
 				xnOSFree(pPoseCookie);
@@ -4618,10 +4638,14 @@ namespace xn
 		inline void XN_API_DEPRECATED("Please use UnregisterFromPoseDetected/UnregisterFromOutOfPose instead") UnregisterFromPoseCallbacks(XnCallbackHandle hCallback)
 		{
 			PoseCookie* pPoseCookie = (PoseCookie*)hCallback;
+#ifdef _WIN32
 #pragma warning (push)
 #pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			xnUnregisterFromPoseCallbacks(GetHandle(), pPoseCookie->hCallback);
+#ifdef _WIN32
 #pragma warning (pop)
+#endif
 			xnOSFree(pPoseCookie);
 		}
 
@@ -5285,15 +5309,22 @@ namespace xn
 	{
 	public:
 		/// Ctor
+#if MANCTL_CHANGES
+		inline EnumerationErrors() : m_pErrors(NULL), m_bAllocated(TRUE) { xnEnumerationErrorsAllocate(&m_pErrors); }
+#else
 		inline EnumerationErrors() : m_bAllocated(TRUE), m_pErrors(NULL) { xnEnumerationErrorsAllocate(&m_pErrors); }
-
+#endif
 		/**
 		 * Ctor
 		 *
 		 * @param	pErrors		[in]	underlying C object to wrap
 		 * @param	bOwn		[in]	TRUE to own the object (i.e. free it upon destruction), FALSE otherwise.
 		 */
+#if MANCTL_CHANGES
+		inline EnumerationErrors(XnEnumerationErrors* pErrors, XnBool bOwn = FALSE) : m_pErrors(pErrors), m_bAllocated(bOwn) {}
+#else
 		inline EnumerationErrors(XnEnumerationErrors* pErrors, XnBool bOwn = FALSE) : m_bAllocated(bOwn), m_pErrors(pErrors) {}
+#endif
 
 		/// Dtor
 		~EnumerationErrors() { Free(); }
@@ -5459,10 +5490,14 @@ namespace xn
 		inline XnStatus XN_API_DEPRECATED("Use other overload!") RunXmlScript(const XnChar* strScript, EnumerationErrors* pErrors = NULL)
 		{
 			m_bUsingDeprecatedAPI = TRUE;
-			#pragma warning (push)
-			#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#ifdef _WIN32
+#pragma warning (push)
+#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			return xnContextRunXmlScript(m_pContext, strScript, pErrors == NULL ? NULL : pErrors->GetUnderlying());
-			#pragma warning (pop)
+#ifdef _WIN32
+#pragma warning (pop)
+#endif
 		}
 
 		/** @copybrief xnContextRunXmlScript
@@ -5487,10 +5522,14 @@ namespace xn
 		inline XnStatus XN_API_DEPRECATED("Use other overload!") RunXmlScriptFromFile(const XnChar* strFileName, EnumerationErrors* pErrors = NULL)
 		{
 			m_bUsingDeprecatedAPI = TRUE;
-			#pragma warning (push)
-			#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#ifdef _WIN32
+#pragma warning (push)
+#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			return xnContextRunXmlScriptFromFile(m_pContext, strFileName, pErrors == NULL ? NULL : pErrors->GetUnderlying());
-			#pragma warning (pop)
+#ifdef _WIN32
+#pragma warning (pop)
+#endif
 		}
 
 		/** @copybrief xnContextRunXmlScriptFromFileEx
@@ -5517,10 +5556,14 @@ namespace xn
 			XnContext* pContext = NULL;
 			m_bUsingDeprecatedAPI = TRUE;
 
-			#pragma warning (push)
-			#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#ifdef _WIN32
+#pragma warning (push)
+#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			XnStatus nRetVal = xnInitFromXmlFile(strFileName, &pContext, pErrors == NULL ? NULL : pErrors->GetUnderlying());
-			#pragma warning (pop)
+#ifdef _WIN32
+#pragma warning (pop)
+#endif
 			XN_IS_STATUS_OK(nRetVal);
 
 			TakeOwnership(pContext);
@@ -5553,10 +5596,14 @@ namespace xn
 		inline XnStatus XN_API_DEPRECATED("Use other overload!") OpenFileRecording(const XnChar* strFileName)
 		{
 			m_bUsingDeprecatedAPI = TRUE;
-			#pragma warning (push)
-			#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#ifdef _WIN32
+#pragma warning (push)
+#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 			return xnContextOpenFileRecording(m_pContext, strFileName);
-			#pragma warning (pop)
+#ifdef _WIN32
+#pragma warning (pop)
+#endif
 		}
 
 		/** @copybrief xnContextOpenFileRecording
@@ -5646,10 +5693,14 @@ namespace xn
 		{
 			if (m_pContext != NULL)
 			{
-				#pragma warning (push)
-				#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#ifdef _WIN32
+#pragma warning (push)
+#pragma warning (disable: XN_DEPRECATED_WARNING_IDS)
+#endif
 				xnShutdown(m_pContext);
+#ifdef _WIN32
 				#pragma warning (pop)
+#endif
 				m_pContext = NULL;
 			}
 		}
