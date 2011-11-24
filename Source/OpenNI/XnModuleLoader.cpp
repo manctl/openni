@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -19,6 +23,32 @@
 *  along with OpenNI. If not, see <http://www.gnu.org/licenses/>.           *
 *                                                                           *
 ****************************************************************************/
+
+#if MANCTL_CHANGES
+
+#include <unistd.h>
+#include <cstdlib>
+#include <iostream>
+
+const char* xn_modules_file = "config/modules.xml";
+
+inline std::string
+getWorkingDirectory ()
+{
+    char* buf = getcwd(0, 0);
+    const std::string ret(buf);
+    free(buf);
+    return ret;
+}
+
+void loadModuleHook (const char* module, const char* config)
+{
+    std::cout << "DBG: Loading module: " << module << std::endl;
+    std::cout << "DBG: Working directory: " << getWorkingDirectory() << std::endl;
+}
+
+#endif
+
 //---------------------------------------------------------------------------
 // Includes
 //---------------------------------------------------------------------------
@@ -144,8 +174,12 @@ XnStatus resolveModulesFile(XnChar* strFileName, XnUInt32 nBufSize)
 	nRetVal = xnGetOpenNIConfFilesPath(strFileName, nBufSize);
 	XN_IS_STATUS_OK(nRetVal);
 
+// We want to control the full path!
+#if MANCTL_CHANGES
+#else
 	nRetVal = xnOSStrAppend(strFileName, "modules.xml", nBufSize);
 	XN_IS_STATUS_OK(nRetVal);
+#endif
 
 	return (XN_STATUS_OK);
 }
@@ -276,6 +310,10 @@ XnStatus XnModuleLoader::LoadAllModules()
 
 XnStatus XnModuleLoader::LoadModule(const XnChar* strFileName, const XnChar* strConfigDir)
 {
+#if MANCTL_CHANGES
+    loadModuleHook(strFileName, strConfigDir);
+#endif
+
 	XnStatus nRetVal = XN_STATUS_OK;
 	
 	xnLogVerbose(XN_MASK_MODULE_LOADER, "Checking %s...", strFileName);
