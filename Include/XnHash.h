@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -765,6 +769,12 @@ private:
 #define XN_DECLARE_DEFAULT_KEY_MANAGER(KeyType, ClassName, KeyTranslator)	\
 	XN_DECLARE_DEFAULT_KEY_MANAGER_DECL(, KeyType, ClassName, KeyTranslator)
 
+#if MANCTL_CHANGES
+#    define MANCTL_XNHASH_COPY_CONSTRUCTOR_CHANGE : XnHash()
+#else
+#    define MANCTL_XNHASH_COPY_CONSTRUCTOR_CHANGE
+#endif
+
 /**
 * Declares a hash table from @a KeyType to @a ValueType named @a ClassName. The hash table uses
 * @a KeyTranslator and @a ValueTranslator for storing keys and values, and @a KeyManager for managing the keys.
@@ -856,6 +866,12 @@ private:
 		{																							\
 			SetHashFunction(Hash);																	\
 			SetCompareFunction(Compare);															\
+		}																							\
+		ClassName(const ClassName& other) MANCTL_XNHASH_COPY_CONSTRUCTOR_CHANGE                     \
+		{																							\
+			SetHashFunction(Hash);																	\
+			SetCompareFunction(Compare);															\
+			*this = other;																			\
 		}																							\
 		virtual ~ClassName()																		\
 		{																							\

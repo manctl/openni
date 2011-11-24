@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -203,7 +207,11 @@ namespace xn
 		 *
 		 * @param [in]	ppData	A pointer to the data member of the meta data object.
 		 */
+#if MANCTL_CHANGES
+		inline OutputMetaData(const XnUInt8** ppData) : m_pAllocatedData(NULL), m_ppData(ppData), m_nAllocatedSize(0)
+#else
 		inline OutputMetaData(const XnUInt8** ppData) : m_ppData(ppData), m_nAllocatedSize(0), m_pAllocatedData(NULL)
+#endif
 		{
 			xnOSMemSet(&m_output, 0, sizeof(XnOutputMetaData));
 		}
@@ -2129,8 +2137,8 @@ namespace xn
 		}
 
 	private:
-		XnNodeQuery* m_pQuery;
 		XnBool m_bAllocated;
+		XnNodeQuery* m_pQuery;
 	};
 
 	//---------------------------------------------------------------------------
@@ -8409,8 +8417,11 @@ private:
 		/**
 		 * Ctor
 		 */
+#if MANCTL_CHANGES
+		inline EnumerationErrors() : m_pErrors(NULL), m_bAllocated(TRUE) { xnEnumerationErrorsAllocate(&m_pErrors); }
+#else
 		inline EnumerationErrors() : m_bAllocated(TRUE), m_pErrors(NULL) { xnEnumerationErrorsAllocate(&m_pErrors); }
-
+#endif
 		/**
 		 * Ctor
 		 *
@@ -8418,7 +8429,11 @@ private:
 		 * @param [in]	bOwn		TRUE to own the object (i.e. free it upon destruction), FALSE
 		 * 							otherwise.
 		 */
+#if MANCTL_CHANGES
+		inline EnumerationErrors(XnEnumerationErrors* pErrors, XnBool bOwn = FALSE) : m_pErrors(pErrors), m_bAllocated(bOwn) {}
+#else
 		inline EnumerationErrors(XnEnumerationErrors* pErrors, XnBool bOwn = FALSE) : m_bAllocated(bOwn), m_pErrors(pErrors) {}
+#endif
 
 		/**
 		 * Dtor
@@ -8899,7 +8914,6 @@ private:
 		{
 			SetHandle(NULL);
 		}
-
 
 		/**
 		 * @copybrief xnAddLicense

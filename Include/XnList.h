@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -553,6 +557,12 @@ private:
 	XN_DISABLE_COPY_AND_ASSIGN(XnList);
 };
 
+#if MANCTL_CHANGES
+#    define MANCTL_XNLIST_COPY_CONSTRUCTOR_CHANGE : XnList()
+#else
+#    define MANCTL_XNLIST_COPY_CONSTRUCTOR_CHANGE
+#endif
+
 /**
 * Declares a list of type @a Type, which is named @a ClassName. The list uses translator @a Translator,
 * and is declared using the @a decl declspec.
@@ -635,6 +645,10 @@ private:
 	public:																						\
 		ClassName()																				\
 		{																						\
+		}																						\
+		ClassName(const ClassName& other) MANCTL_XNLIST_COPY_CONSTRUCTOR_CHANGE			        \
+		{																						\
+			*this = other;																		\
 		}																						\
 		~ClassName()																			\
 		{																						\

@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
