@@ -6619,7 +6619,11 @@ XnStatus xnGetOpenNIConfFilesPath(XnChar* strDest, XnUInt32 nBufSize)
 		XN_IS_STATUS_OK(nRetVal);
 	}
 
+#ifdef XN_USE_CUSTOM_MODULES_FILE
+	nRetVal = xnOSStrCopy(strDest, XN_USE_CUSTOM_MODULES_FILE, nBufSize);
+#else
 	nRetVal = xnOSStrAppend(strDest, XN_OPEN_NI_FILES_LOCATION, nBufSize);
+#endif
 	XN_IS_STATUS_OK(nRetVal);
 	
 	return (XN_STATUS_OK);
