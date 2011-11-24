@@ -1,3 +1,7 @@
+#ifndef     MANCTL_CHANGES
+#    define MANCTL_CHANGES 1
+#endif
+
 /****************************************************************************
 *                                                                           *
 *  OpenNI 1.x Alpha                                                         *
@@ -21,6 +25,10 @@
 ****************************************************************************/
 #ifndef __XN_MODULE_LOADER_H__
 #define __XN_MODULE_LOADER_H__
+
+#if MANCTL_CHANGES
+extern const char* xn_modules_file;
+#endif
 
 //---------------------------------------------------------------------------
 // Includes
