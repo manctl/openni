@@ -45,7 +45,7 @@
 #if (XN_PLATFORM == XN_PLATFORM_WIN32)
 	#include "Win32/XnOSWin32.h"
 #elif (XN_PLATFORM == XN_PLATFORM_MACOSX)
-	#include "MacOSX/XnPlatformMacOSX.h"
+	#include "MacOSX/XnOSMacOSX.h"
 #elif (XN_PLATFORM == XN_PLATFORM_LINUX_X86 || XN_PLATFORM == XN_PLATFORM_LINUX_ARM || XN_PLATFORM == XN_PLATFORM_ANDROID_ARM)
 	#include "Linux-x86/XnOSLinux-x86.h"
 #elif defined(_ARC)
