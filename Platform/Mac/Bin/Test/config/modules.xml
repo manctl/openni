@@ -1,0 +1,8 @@
+<Modules>
+    <Module path="./../lib/libnimMockNodes.dylib" />
+    <Module path="./../lib/libnimCodecs.dylib" />
+    <Module path="./../lib/libnimRecorder.dylib" />
+    <Module path="./../lib/libXnDevicesSensorV2.dylib" configDir="./../config/" />
+    <Module path="./../lib/libXnVFeatures.dylib" configDir="./../config/" />
+    <Module path="./../lib/libXnVHandGenerator.dylib" configDir="./../config/" />
+</Modules>
