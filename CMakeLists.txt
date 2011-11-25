@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 
+#include_directories(/Users/nt/Work/manctl/mansdk/stage/include)
+#link_directories(/Users/nt/Work/manctl/mansdk/stage/lib)
+
 if(NOT DEFINED MANCTL_CHANGES)
     set(       MANCTL_CHANGES ON)
 endif()
@@ -61,25 +64,20 @@ ENDIF()
 
 # Find JPEG system lib
 # ---------------------
-find_package(JPEG)
-if(NOT JPEG_FOUND)
-	# when not found use the one in the externals folder, so we can compile!
-	set(JPEG_FOUND true)
-	set(JPEG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/External/LibJPEG/")
-	set(JPEG_LIBRARY jpeg)
-	add_subdirectory("./Source/External/LibJPEG/")
-endif()
+find_package(jpeg REQUIRED NO_MODULE)
+#if(NOT JPEG_FOUND)
+#	# when not found use the one in the externals folder, so we can compile!
+#	set(JPEG_FOUND true)
+#	set(JPEG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/External/LibJPEG/")
+#	set(JPEG_LIBRARY jpeg)
+#	add_subdirectory("./Source/External/LibJPEG/")
+#endif()
 
 # Find USB lib
 # -------------
-if(NOT WIN32)
-  SET(USB_INCLUDE_DIR "${LIBUSB_1_INCLUDE_DIR}")
-  SET(USB_LIBRARY ${LIBUSB_1_LIBRARY})
-endif()
 
-# FIXME: find jpeg on Mac.
-if (NOT JPEG_FOUND)
-	message(FATAL_ERROR "Could not find library dependencies")
+if(NOT WIN32)
+    find_package(usb REQUIRED)
 endif()
 
 # @todo find tinyxml!
@@ -134,3 +132,6 @@ foreach(dir . MacOSX Linux-x86 Linux-Arm Win32)
 endforeach()
 
 install(DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/config DESTINATION bin/)
+
+install(FILES  openni-config.cmake DESTINATION share/openni)
+install(EXPORT openni-exports      DESTINATION share/openni)
