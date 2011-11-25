@@ -1,6 +1,5 @@
 # Add search paths.
 # ------------------
-include_directories(${USB_INCLUDE_DIR})
 include_directories(${TINYXML_INCLUDE_DIR})
 include_directories(${OPENNI_INCLUDE_DIR})
 include_directories("./FilesOnly")
@@ -27,12 +26,14 @@ add_library(
 	${${OPENNI_LIB_NAME}_platform_sources}
 )
 
+set_property(TARGET ${OPENNI_LIB_NAME} PROPERTY LINK_INTERFACE_LIBRARIES "")
+
 # Set Link libraries.
 # -------------------
 find_library(LIBDL dl)
 target_link_libraries(
 	${OPENNI_LIB_NAME}
-	${USB_LIBRARY} 
+        usb
 	${LIBDL} 
 	${TINYXML_LIB_NAME}
 	${CMAKE_EXE_LINKER_FLAGS}
@@ -41,7 +42,7 @@ target_link_libraries(
 # Set path where to install the target, lib, runtime. 
 # (to same dir where we call cmake ., as we use the "dot")
 # -----------------------------------------------------
-install(TARGETS ${OPENNI_LIB_NAME}
+install(TARGETS ${OPENNI_LIB_NAME} EXPORT openni-exports
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
