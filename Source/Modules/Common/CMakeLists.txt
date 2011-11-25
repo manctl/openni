@@ -8,7 +8,7 @@ include_directories(${OPENNI_MODULES_DIR}/Common/)
 add_library(${NIMCOMMON_LIB_NAME} SHARED ${${NIMCOMMON_LIB_NAME}_sources})
 target_link_libraries(${NIMCOMMON_LIB_NAME} ${OPENNI_LIB_NAME})
 
-install(TARGETS ${NIMCOMMON_LIB_NAME}
+install(TARGETS ${NIMCOMMON_LIB_NAME} EXPORT openni-exports
 	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
 )
