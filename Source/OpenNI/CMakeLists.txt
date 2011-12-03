@@ -36,7 +36,7 @@ target_link_libraries(
         usb
 	${LIBDL} 
 	${TINYXML_LIB_NAME}
-	${CMAKE_EXE_LINKER_FLAGS}
+#	${CMAKE_EXE_LINKER_FLAGS}
 )
 
 # Set path where to install the target, lib, runtime. 
