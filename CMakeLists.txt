@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 
-#include_directories(/Users/nt/Work/manctl/mansdk/stage/include)
-#link_directories(/Users/nt/Work/manctl/mansdk/stage/lib)
-
 if(NOT DEFINED MANCTL_CHANGES)
     set(       MANCTL_CHANGES ON)
 endif()
@@ -51,16 +48,16 @@ set(NIMRECORDER_LIB_NAME nimRecorder)
 
 INCLUDE_DIRECTORIES(${OPENNI_INCLUDE_DIR})
 
-IF (APPLE)
-  LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/MacOSX)
-ELSEIF (UNIX)
-  IF(ARCHITECTURE_IS_X86_64)
-    LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/Linux64)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC" )
-  ELSE()
-    LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/Linux32)
-  ENDIF()
-ENDIF()
+#IF (APPLE)
+#  LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/MacOSX)
+#ELSEIF (UNIX)
+#  IF(ARCHITECTURE_IS_X86_64)
+#    LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/Linux64)
+#    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC" )
+#  ELSE()
+#    LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Nite/Lib/Linux32)
+#  ENDIF()
+#ENDIF()
 
 # Find JPEG system lib
 # ---------------------
