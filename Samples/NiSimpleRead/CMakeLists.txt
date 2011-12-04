@@ -15,6 +15,4 @@ add_executable(${SIMPLEREAD_EXE} ${${SIMPLEREAD_EXE}_sources})
 
 # And make it link against these libs.
 # ---------------------------------------
-target_link_libraries(${SIMPLEREAD_EXE} ${OPENNI_LIB_NAME})
-add_dependencies(${SIMPLEREAD_EXE} ${OPENNI_LIB_NAME})
-
+target_link_libraries(${SIMPLEREAD_EXE} OpenNI)

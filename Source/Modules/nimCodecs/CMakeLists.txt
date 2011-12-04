@@ -1,15 +1,15 @@
 #project(nimCodecs)
 
-file(GLOB ${NIMCODECS_LIB_NAME}_sources ./*.cpp)
+file(GLOB nimCodecs_sources ./*.cpp)
 
 include_directories(${JPEG_INCLUDE_DIR})
 include_directories(${OPENNI_INCLUDE_DIR})
 include_directories(${OPENNI_MODULES_DIR}/Common/)
 
-add_library(${NIMCODECS_LIB_NAME} SHARED ${${NIMCODECS_LIB_NAME}_sources})
-target_link_libraries(${NIMCODECS_LIB_NAME} jpeg ${OPENNI_LIB_NAME})
+add_library(nimCodecs SHARED ${nimCodecs_sources})
+target_link_libraries(nimCodecs jpeg OpenNI)
 
-install(TARGETS ${NIMCODECS_LIB_NAME} EXPORT openni-exports
+install(TARGETS nimCodecs EXPORT openni-exports
 	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
 )

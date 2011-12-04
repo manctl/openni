@@ -21,12 +21,8 @@ if(DEFINED OPENNI_PLATFORM_APPLE)
 	find_library(OPENGL_LIB OpenGL)
 endif(DEFINED OPENNI_PLATFORM_APPLE)
 
-target_link_libraries(
-	${VIEWER_EXE} 
-	${OPENNI_LIB_NAME} 
-	${GLUT_LIB} 
-	${OPENGL_LIB}
+target_link_libraries(${VIEWER_EXE} 
+    OpenNI 
+    ${GLUT_LIB} 
+    ${OPENGL_LIB}
 )
-
-add_dependencies(${VIEWER_EXE} ${OPENNI_LIB_NAME})
-

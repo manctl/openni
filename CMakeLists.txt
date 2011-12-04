@@ -38,13 +38,6 @@ set(CMAKE_INSTALL_RPATH ../lib)
 set(TINYXML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/External/TinyXml/")
 set(OPENNI_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Include/")
 set(OPENNI_MODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/Modules")
-set(TINYXML_LIB_NAME TinyXml)
-set(JPEG_LIB_NAME jpeg)
-set(OPENNI_LIB_NAME OpenNI)
-set(NIMCOMMON_LIB_NAME nimCommon)
-set(NIMCODECS_LIB_NAME nimCodecs)
-set(NIMMOCKNODES_LIB_NAME nimMockNodes)
-set(NIMRECORDER_LIB_NAME nimRecorder)
 
 INCLUDE_DIRECTORIES(${OPENNI_INCLUDE_DIR})
 
@@ -81,25 +74,25 @@ endif()
 
 # Use external libraries.
 # -----------------------
-add_subdirectory("./Source/External/TinyXml/") # @todo only when lib was not found
-add_subdirectory("./Source/OpenNI/")
-add_subdirectory("./Source/Modules/")
+add_subdirectory("Source/External/TinyXml/") # @todo only when lib was not found
+add_subdirectory("Source/OpenNI/")
+add_subdirectory("Source/Modules/")
 
 # Add samples
 # ---------------------------
 IF (OPENNI_BUILD_SAMPLES)
-  add_subdirectory("./Samples/NiAudioSample") #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiBackRecorder") #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiConvertXToONI") #Compiles and runs on Mac
-  #add_subdirectory("./Samples/NiCRead") #Compiles and runs on Mac # gives error in linux
-  add_subdirectory("./Samples/NiRecordSynthetic") #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiSampleModule") #Library compiles on Mac
-  add_subdirectory("./Samples/NiSimpleCreate") #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiSimpleRead")  #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiSimpleViewer") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiAudioSample") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiBackRecorder") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiConvertXToONI") #Compiles and runs on Mac
+  #add_subdirectory("Samples/NiCRead") #Compiles and runs on Mac # gives error in linux
+  add_subdirectory("Samples/NiRecordSynthetic") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiSampleModule") #Library compiles on Mac
+  add_subdirectory("Samples/NiSimpleCreate") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiSimpleRead")  #Compiles and runs on Mac
+  add_subdirectory("Samples/NiSimpleViewer") #Compiles and runs on Mac
   #Disable because of opengles.
-  #add_subdirectory("./Samples/NiUserTracker") #Compiles and runs on Mac
-  add_subdirectory("./Samples/NiViewer") #Compiles and runs on Mac
+  #add_subdirectory("Samples/NiUserTracker") #Compiles and runs on Mac
+  add_subdirectory("Samples/NiViewer") #Compiles and runs on Mac
 ENDIF()
 
 # Utils

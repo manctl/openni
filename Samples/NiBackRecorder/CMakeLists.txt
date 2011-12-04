@@ -14,7 +14,7 @@ add_executable(${BACKRECORDER_EXE} ${${BACKRECORDER_EXE}_sources})
 
 # And make it link against these libs.
 # ---------------------------------------
-target_link_libraries(${BACKRECORDER_EXE} ${OPENNI_LIB_NAME})
+target_link_libraries(${BACKRECORDER_EXE} OpenNI)
 
 # Link to the shared libraries locally (from execution dir)
 # ----------------------------------------------------------
