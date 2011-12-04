@@ -7,16 +7,21 @@ else()
     set(M32 ON)
 endif()
 
-set(${TINYXML_LIB_NAME}_sources tinyxml.cpp tinystr.cpp tinyxmlerror.cpp tinyxmlparser.cpp)
+set(TinyXml_SOURCES
+    tinyxml.cpp
+    tinystr.cpp
+    tinyxmlerror.cpp
+    tinyxmlparser.cpp
+)
 
 if(LINUX AND M64)
-        list(APPEND ${TINYXML_LIB_NAME}_COMPILE_FLAGS "-fPIC")
+    list(APPEND TinyXml_COMPILE_FLAGS "-fPIC")
 endif()
 
-add_library(${TINYXML_LIB_NAME} STATIC ${${TINYXML_LIB_NAME}_sources})
+add_library(TinyXml STATIC ${TinyXml_SOURCES})
 
-if(${TINYXML_LIB_NAME}_COMPILE_FLAGS)
-    set_property(TARGET ${TINYXML_LIB_NAME} PROPERTY COMPILE_FLAGS ${${TINYXML_LIB_NAME}_COMPILE_FLAGS})
+if(tinyxml_COMPILE_FLAGS)
+    set_property(TARGET TinyXml PROPERTY COMPILE_FLAGS ${TinyXml_COMPILE_FLAGS})
 endif()
 
-install(TARGETS ${TINYXML_LIB_NAME} EXPORT openni-exports DESTINATION lib)
+install(TARGETS TinyXml EXPORT openni-exports DESTINATION lib)
