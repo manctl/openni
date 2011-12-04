@@ -15,5 +15,4 @@ add_executable(${SIMPLECREATE_EXE} ${${SIMPLECREATE_EXE}_sources})
 
 # And make it link against these libs.
 # ---------------------------------------
-target_link_libraries(${SIMPLECREATE_EXE} ${OPENNI_LIB_NAME})
-add_dependencies(${SIMPLECREATE_EXE} ${OPENNI_LIB_NAME})
+target_link_libraries(${SIMPLECREATE_EXE} OpenNI)

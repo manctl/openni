@@ -6,43 +6,40 @@ include_directories("./FilesOnly")
 
 # Get sources for OpenNI
 # ----------------------
-file(GLOB ${OPENNI_LIB_NAME}_sources ./*.cpp ./*.h ../../Include/*.h)
+file(GLOB OpenNI_sources ./*.cpp ./*.h ../../Include/*.h)
 
 # Add platform specific sources.
 # ------------------------------
 if(OPENNI_PLATFORM_LINUX)
-	file(GLOB ${OPENNI_LIB_NAME}_platform_sources ./Linux-x86/*.cpp)
+	file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
 elseif(OPENNI_PLATFORM_APPLE)
-	file(GLOB ${OPENNI_LIB_NAME}_platform_sources ./Linux-x86/*.cpp)
+	file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
 	set(CMAKE_EXE_LINKER_FLAGS "-framework CoreFoundation -framework IOKit")
 endif()
 
 # Set our target
 # ---------------
-add_library(
-	${OPENNI_LIB_NAME} 
-	SHARED 
-	${${OPENNI_LIB_NAME}_sources} 
-	${${OPENNI_LIB_NAME}_platform_sources}
+add_library(OpenNI SHARED 
+	${OpenNI_sources} 
+	${OpenNI_platform_sources}
 )
 
-set_property(TARGET ${OPENNI_LIB_NAME} PROPERTY LINK_INTERFACE_LIBRARIES "")
+set_property(TARGET OpenNI PROPERTY LINK_INTERFACE_LIBRARIES "")
 
 # Set Link libraries.
 # -------------------
 find_library(LIBDL dl)
-target_link_libraries(
-	${OPENNI_LIB_NAME}
+target_link_libraries(OpenNI
         usb
 	${LIBDL} 
-	${TINYXML_LIB_NAME}
+	TinyXml
 #	${CMAKE_EXE_LINKER_FLAGS}
 )
 
 # Set path where to install the target, lib, runtime. 
 # (to same dir where we call cmake ., as we use the "dot")
 # -----------------------------------------------------
-install(TARGETS ${OPENNI_LIB_NAME} EXPORT openni-exports
+install(TARGETS OpenNI EXPORT openni-exports
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
