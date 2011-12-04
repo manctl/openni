@@ -20,7 +20,7 @@ endif()
 
 add_library(TinyXml STATIC ${TinyXml_SOURCES})
 
-if(tinyxml_COMPILE_FLAGS)
+if(TinyXml_COMPILE_FLAGS)
     set_property(TARGET TinyXml PROPERTY COMPILE_FLAGS ${TinyXml_COMPILE_FLAGS})
 endif()
 
