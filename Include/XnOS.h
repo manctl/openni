@@ -470,6 +470,8 @@ XN_C_API XnStatus XN_C_DECL xnOSGetFullPathName(const XnChar* strFilePath, XnCha
 XN_C_API XnStatus XN_C_DECL xnOSGetCurrentDir(XnChar* cpDirName, const XnUInt32 nBufferSize);
 XN_C_API XnStatus XN_C_DECL xnOSSetCurrentDir(const XnChar* cpDirName);
 XN_C_API XnStatus XN_C_DECL xnOSDeleteFile(const XnChar* cpFileName);
+XN_C_API XnStatus XN_C_DECL xnAppendPath(XnChar* pPath, const XnChar* cpPathSuffix, const XnUInt32 nPathLength);
+XN_C_API XnBool XN_C_DECL xnOSIsRelativePath(const XnChar* cpFilePath);
 
 // INI
 XN_C_API XnStatus XN_C_DECL xnOSReadStringFromINI(const XnChar* cpINIFile, const XnChar* cpSection, const XnChar* cpKey, XnChar* cpDest, const XnUInt32 nDestLength);
@@ -485,6 +487,7 @@ XN_C_API XnStatus XN_C_DECL xnOSWriteIntToINI(const XnChar* cpINIFile, const XnC
 XN_C_API XnStatus XN_C_DECL xnOSLoadLibrary(const XnChar* cpFileName, XN_LIB_HANDLE* pLibHandle);
 XN_C_API XnStatus XN_C_DECL xnOSFreeLibrary(const XN_LIB_HANDLE LibHandle);
 XN_C_API XnStatus XN_C_DECL xnOSGetProcAddress(const XN_LIB_HANDLE LibHandle, const XnChar* cpProcName, XnFarProc* pProcAddr);
+XN_C_API XnStatus XN_C_DECL xnOSGetLibraryPath (const XN_LIB_HANDLE LibHandle, XnChar* strDest, XnUInt32 nDestSize);
 
 struct timespec;
 	
