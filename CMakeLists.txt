@@ -80,20 +80,9 @@ add_subdirectory("Source/Modules/")
 
 # Add samples
 # ---------------------------
-IF (OPENNI_BUILD_SAMPLES)
-  add_subdirectory("Samples/NiAudioSample") #Compiles and runs on Mac
-  add_subdirectory("Samples/NiBackRecorder") #Compiles and runs on Mac
-  add_subdirectory("Samples/NiConvertXToONI") #Compiles and runs on Mac
-  #add_subdirectory("Samples/NiCRead") #Compiles and runs on Mac # gives error in linux
-  add_subdirectory("Samples/NiRecordSynthetic") #Compiles and runs on Mac
-  add_subdirectory("Samples/NiSampleModule") #Library compiles on Mac
-  add_subdirectory("Samples/NiSimpleCreate") #Compiles and runs on Mac
-  add_subdirectory("Samples/NiSimpleRead")  #Compiles and runs on Mac
-  add_subdirectory("Samples/NiSimpleViewer") #Compiles and runs on Mac
-  #Disable because of opengles.
-  #add_subdirectory("Samples/NiUserTracker") #Compiles and runs on Mac
-  add_subdirectory("Samples/NiViewer") #Compiles and runs on Mac
-ENDIF()
+if(OPENNI_BUILD_SAMPLES)
+    add_subdirectory(Samples)
+endif()
 
 # Utils
 # ---------------------------
