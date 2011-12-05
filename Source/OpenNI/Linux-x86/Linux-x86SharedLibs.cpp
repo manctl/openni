@@ -36,7 +36,7 @@ XN_C_API XnStatus xnOSLoadLibrary(const XnChar* cpFileName, XN_LIB_HANDLE* pLibH
 	XN_VALIDATE_OUTPUT_PTR(pLibHandle);
 
 	// Load the requested shared library via the OS
-	*pLibHandle = dlopen(cpFileName, RTLD_NOW);
+	*pLibHandle = dlopen(cpFileName, RTLD_NOW | RTLD_LOCAL);
 	
 	// Make sure it succeeded (return value is not NULL). If not return an error....
 	if (*pLibHandle == NULL)
