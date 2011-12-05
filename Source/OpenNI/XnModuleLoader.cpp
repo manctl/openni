@@ -229,6 +229,27 @@ XnStatus saveModulesFile(TiXmlDocument& doc)
 	return (XN_STATUS_OK);
 }
 
+XnChar* resolveModuleConfigDir (XN_LIB_HANDLE handle, const XnChar* configDir)
+{
+    if (NULL == configDir)
+        return NULL;
+
+    // Return copies of absolute module configuration directory paths.
+    if (!xnOSIsRelativePath(configDir))
+        return xnOSStrDup(configDir);
+    
+    // Resolve relative module configuration directory paths from their module library directory.
+    XnChar strLibraryPath[XN_FILE_MAX_PATH];
+    xnOSGetLibraryPath(handle, strLibraryPath, XN_FILE_MAX_PATH);
+    
+    XnChar strConfigDirPath[XN_FILE_MAX_PATH];
+    xnOSGetDirName(strLibraryPath, strConfigDirPath, XN_FILE_MAX_PATH);
+
+    xnAppendPath(strConfigDirPath, configDir, XN_FILE_MAX_PATH);
+
+    return xnOSStrDup(strConfigDirPath);
+}
+
 //---------------------------------------------------------------------------
 // Code
 //---------------------------------------------------------------------------
@@ -330,9 +351,12 @@ XnStatus XnModuleLoader::LoadModule(const XnChar* strFileName, const XnChar* str
 		return (XN_STATUS_OK);
 	}
 
-	nRetVal = AddModuleGenerators(strFileName, hLib, strConfigDir);
+    XnChar* strResolvedConfigDir = resolveModuleConfigDir(hLib, strConfigDir);
+
+	nRetVal = AddModuleGenerators(strFileName, hLib, strResolvedConfigDir);
 	if (nRetVal != XN_STATUS_OK)
 	{
+		xnOSFree(strResolvedConfigDir);
 		xnOSFreeLibrary(hLib);
 		return (nRetVal);
 	}
@@ -342,6 +366,8 @@ XnStatus XnModuleLoader::LoadModule(const XnChar* strFileName, const XnChar* str
 		printf("\n");
 	}
 
+    xnOSFree(strResolvedConfigDir);       
+        
 	return (XN_STATUS_OK);
 }
 

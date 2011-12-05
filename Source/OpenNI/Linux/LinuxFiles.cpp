@@ -624,3 +624,21 @@ XN_C_API XnStatus xnOSDoesDirecotyExist(const XnChar* cpDirName, XnBool* pbResul
 	return (XN_STATUS_OK);
 }
 
+XN_C_API XnStatus xnAppendPath(XnChar* pPath, const XnChar* cpPathSuffix, const XnUInt32 nPathLength)
+{
+    XnStatus nRetVal = xnOSStrAppend(pPath, "/", nPathLength);
+    XN_IS_STATUS_OK(nRetVal);
+
+    return xnOSStrAppend(pPath, cpPathSuffix, nPathLength);  
+}
+
+XN_C_API XnBool xnOSIsRelativePath(const XnChar* cpFilePath)
+{
+    if (NULL == cpFilePath || 0 == strlen(cpFilePath))
+            return false;
+
+    if ('/' == cpFilePath[0])
+            return false;
+
+    return true;
+}
