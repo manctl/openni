@@ -672,3 +672,30 @@ XN_C_API XnStatus xnOSGetFullPathName(const XnChar* strFilePath, XnChar* strFull
 
 	return XN_STATUS_OK;
 }
+
+XN_C_API XnStatus xnAppendPath(XnChar* pPath, const XnChar* cpPathSuffix, const XnUInt32 nPathLength)
+{
+    XnStatus nRetVal = xnOSStrAppend(pPath, "\\", nPathLength);
+    XN_IS_STATUS_OK(nRetVal);
+    
+    return xnOSStrAppend(pPath, cpPathSuffix, nPathLength);
+}
+
+XN_C_API XnBool xnOSIsRelativePath(const XnChar* cpFilePath)
+{
+    if (NULL == cpFilePath)
+            return false;
+    
+    const XnSizeT len = strlen(cpFilePath);
+    
+    if (0 == len)
+            return false;
+   
+    if (1 < len && isalpha(cpFilePath[0]) && ':' == cpFilePath[1])
+            return false;
+    
+    if (1 < len && '/' == cpFilePath[0] && '/' == cpFilePath[1])
+            return false;
+    
+    return true;
+}

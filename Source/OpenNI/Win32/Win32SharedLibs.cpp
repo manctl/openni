@@ -81,3 +81,14 @@ XN_C_API XnStatus xnOSGetProcAddress(const XN_LIB_HANDLE LibHandle, const XnChar
 	// All is good...
 	return (XN_STATUS_OK);
 }
+
+XN_C_API XnStatus xnOSGetLibraryPath (const XN_LIB_HANDLE LibHandle, XnChar* strDest, XnUInt32 nDestSize)
+{
+    // Make sure the actual shared library handle isn't NULL
+    XN_RET_IF_NULL(LibHandle, XN_STATUS_OS_INVALID_LIBRARY);
+    
+    if (0 == GetModuleFileName(LibHandle, strDest, nDestSize))
+            return XN_STATUS_ERROR;
+
+    return XN_STATUS_OK;
+}
