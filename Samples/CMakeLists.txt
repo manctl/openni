@@ -112,6 +112,11 @@ target_link_libraries(NiViewer
     ${OPENGL_LIB}
 )
 
+#-------------------------------------------------------------------------------
+
+add_executable(kinect-motors Kinect/kinect-motors.cpp)
+target_link_libraries(kinect-motors OpenNI)
+
 #===============================================================================
 
 install(TARGETS
