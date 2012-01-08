@@ -9,5 +9,6 @@ target_link_libraries(nimCodecs nimCommon jpeg OpenNI)
 
 install(TARGETS nimCodecs EXPORT openni-exports
 	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
 )

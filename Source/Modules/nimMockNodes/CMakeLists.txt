@@ -8,5 +8,6 @@ target_link_libraries(nimMockNodes nimCommon OpenNI)
 
 install(TARGETS nimMockNodes EXPORT openni-exports
 	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
 )
