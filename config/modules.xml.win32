@@ -1,0 +1,11 @@
+<Modules>
+    <Module path="../bin/nimMockNodes.dll" />
+    <Module path="../bin/nimCodecs.dll" />
+    <Module path="../bin/nimRecorder.dll" />
+    <Module path="../bin/XnDevicesSensorV2.dll"       configDir="config"/>
+    <Module path="../bin/XnDeviceFile.dll"            configDir="config"/>
+    <Module path="../bin/XnKinectDevicesSensorV2.dll" configDir="config"/>
+    <Module path="../bin/XnKinectDeviceFile.dll"      configDir="config"/>
+    <Module path="../bin/XnVFeatures.dll"             configDir="config/XnVFeatures"/>
+    <Module path="../bin/XnVHandGenerator.dll"        configDir="config/XnVHandGenerator"/>
+</Modules>
