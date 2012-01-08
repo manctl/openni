@@ -5,13 +5,13 @@
 
 #ifdef _WIN32
 #include <Windows.h>
-void pause ()
+void pause_ ()
 {
     Sleep(1000);
 }
 #else
 #include <unistd.h>
-void pause ()
+void pause_ ()
 {
     sleep(1);
 }
@@ -157,10 +157,12 @@ int main(int argc, char *argv[])
         return 1;
     
     motors.Move(31); // Move them up to 31 degree
-    pause();
+
+    pause_();
     
     motors.Move(-31); // Move them down to 31 degree.
-    pause();
+
+    pause_();
     
     motors.Move(0);
     return 0;

@@ -135,6 +135,7 @@ install(TARGETS
     NiViewer
 
     ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )
 

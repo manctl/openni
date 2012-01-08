@@ -10,5 +10,6 @@ target_link_libraries(nimRecorder OpenNI nimCommon)
 
 install(TARGETS nimRecorder EXPORT openni-exports
 	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
 )
