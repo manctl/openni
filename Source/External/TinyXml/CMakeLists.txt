@@ -24,4 +24,4 @@ if(TinyXml_COMPILE_FLAGS)
     set_property(TARGET TinyXml PROPERTY COMPILE_FLAGS ${TinyXml_COMPILE_FLAGS})
 endif()
 
-install(TARGETS TinyXml EXPORT openni-exports DESTINATION lib)
+install(TARGETS TinyXml EXPORT openni-exports ARCHIVE DESTINATION lib)

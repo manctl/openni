@@ -1,5 +1,3 @@
-#project(nimRecorder)
-
 file(GLOB nimRecorder_sources ./*.cpp)
 
 include_directories(${OPENNI_INCLUDE_DIR})
@@ -11,6 +9,6 @@ target_link_libraries(nimRecorder OpenNI nimCommon)
 
 
 install(TARGETS nimRecorder EXPORT openni-exports
-	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
 )

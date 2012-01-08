@@ -1,6 +1,18 @@
 include_directories(${OPENNI_INCLUDE_DIR})
 
-find_library(GLUT_LIB glut)
+if(WIN32)
+    # FIXME: Add glut as a proper dependency.
+    if (CMAKE_CL_64)
+        set(GLUT_DLL ${OpenNI_SOURCE_DIR}/Platform/Win32/Bin64/Release/glut64.dll)
+        set(GLUT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/NiViewer/Libs/glut64.lib)
+    else()
+        set(GLUT_DLL ${OpenNI_SOURCE_DIR}/Platform/Win32/Bin/Release/glut32.dll)
+        set(GLUT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/NiViewer/Libs/glut32.lib)
+    endif()
+    set(AUDIO_LIB winmm.lib)
+else()
+    find_library(GLUT_LIB glut)
+endif()
 
 if(DEFINED OPENNI_PLATFORM_APPLE)
     find_library(OPENGL_LIB OpenGL)
@@ -12,7 +24,7 @@ file(GLOB NiAudioSample_SOURCES NiAudioSample/*.cpp)
 
 add_executable(NiAudioSample ${NiAudioSample_SOURCES})
 
-target_link_libraries(NiAudioSample OpenNI)
+target_link_libraries(NiAudioSample OpenNI ${AUDIO_LIB})
 
 #-------------------------------------------------------------------------------
 
@@ -91,11 +103,7 @@ if(FALSE)
     
     add_executable(NiUserTracker ${NiUserTracker_SOURCES})
     
-    target_link_libraries(NiUserTracker
-        OpenNI
-        ${GLUT_LIB}
-        ${OPENGL_LIB}
-    )
+    target_link_libraries(NiUserTracker OpenNI ${GLUT_LIB} ${OPENGL_LIB})
 endif()
 
 #-------------------------------------------------------------------------------
@@ -106,11 +114,7 @@ include_directories(NiViewer)
 
 add_executable(NiViewer ${NiViewer_SOURCES})
 
-target_link_libraries(NiViewer 
-    OpenNI 
-    ${GLUT_LIB} 
-    ${OPENGL_LIB}
-)
+target_link_libraries(NiViewer OpenNI ${GLUT_LIB} ${OPENGL_LIB} ${AUDIO_LIB})
 
 #-------------------------------------------------------------------------------
 
@@ -130,6 +134,10 @@ install(TARGETS
     NiSimpleViewer
     NiViewer
 
-    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
 )
+
+if(GLUT_DLL)
+    install(FILES ${GLUT_DLL} DESTINATION bin)
+endif()
