@@ -66,9 +66,7 @@ find_package(jpeg REQUIRED NO_MODULE)
 # Find USB lib
 # -------------
 
-if(NOT WIN32)
-    find_package(usb REQUIRED)
-endif()
+find_package(usb REQUIRED)
 
 # @todo find tinyxml!
 
