@@ -5,10 +5,10 @@ include_directories("./FilesOnly")
 file(GLOB OpenNI_sources ./*.cpp ./*.h ../../Include/*.h)
 
 if(OPENNI_PLATFORM_LINUX)
-    file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
+    file(GLOB OpenNI_platform_sources ./Linux/*.cpp)
 elseif(OPENNI_PLATFORM_APPLE)
-    file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
-    set(OPENNI_PLATFORM_LIBS "-framework CoreFoundation -framework IOKit")
+    file(GLOB OpenNI_platform_sources ./Linux/*.cpp)
+    set(OPENNI_PLATFORM_LIBS)
 elseif(OPENNI_PLATFORM_WIN32)
     file(GLOB OpenNI_platform_sources ./WIN32/*.cpp)
     set(OPENNI_PLATFORM_LIBS Ws2_32.lib Setupapi.lib)
@@ -37,4 +37,5 @@ target_link_libraries(OpenNI
 install(TARGETS OpenNI EXPORT openni-exports
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
 )
