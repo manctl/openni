@@ -1,10 +1,13 @@
 <OpenNI>
 	<Licenses>
-	  <License vendor="PrimeSense" key="0KOIk2JeIBYClPWVnMoRKn5cdY4=" />
+		<License vendor="PrimeSense" key="0KOIk2JeIBYClPWVnMoRKn5cdY4=" />
+		<!-- Add application-specific licenses here
+		<License vendor="vendor" key="key"/>
+		-->
 	</Licenses>
-	<Log writeToConsole="false" writeToFile="true">
+	<Log writeToConsole="false" writeToFile="false">
 		<!-- 0 - Verbose, 1 - Info, 2 - Warning, 3 - Error (default) -->
-		<LogLevel value="2"/>
+		<LogLevel value="3"/>
 		<Masks>
 			<Mask name="ALL" on="true"/>
 		</Masks>
@@ -12,21 +15,45 @@
 		</Dumps>
 	</Log>
 	<ProductionNodes>
-		<Node type="Image" name="Image1">
+		<!-- Uncomment following line, in order to run from a recording
+		<Recording file="sampleRec.oni" />
+		-->
+
+		<!-- Set global mirror -->
+		<GlobalMirror on="true"/>
+
+		<!-- Create a depth node and give it a name alias (useful if referenced ahead in this script) -->
+		<Node type="Depth" name="MyDepth">
+			<Query>
+				<!-- Uncomment to filter by vendor name, product name, etc.
+				<Vendor>MyVendor inc.</Vendor>
+				<Name>MyProduct</Name>
+				<MinVersion>1.2.3.4</MinVersion>
+				<Capabilities>
+					<Capability>Cropping</Capability>
+				</Capabilities>
+				-->
+			</Query>
 			<Configuration>
+				<!-- Uncomment to set requested mode
 				<MapOutputMode xRes="640" yRes="480" FPS="30"/>
-				<Mirror on="true"/>
+				-->
+
+				<!-- Uncomment to override global mirror
+				<Mirror on="false" />
+				-->
 			</Configuration>
 		</Node>
-		<Node type="Depth" name="Depth1">
-			<Configuration>
-				<MapOutputMode xRes="640" yRes="480" FPS="30"/>
-				<Mirror on="true"/>
-			</Configuration>
-		</Node>
-		<!--
-		<Node type="Audio" name="Audio1">
-		</Node>
+
+		<!-- Create an image node. If it fails, continue anyway. -->
+		<Node type="Image" stopOnError="false" />
+
+		<!-- Uncomment nodes from here if you need them.
+		<Node type="Audio" />
+		<Node type="User" />
+		<Node type="Hands" />
+		<Node type="Gesture" />
+		<Node type="Scene" />
 		-->
 	</ProductionNodes>
 </OpenNI>
