@@ -1,4 +1,3 @@
-#project(niReg)
 set(REG_EXE niReg)
 
 file(GLOB ${REG_EXE}_sources ./*.cpp)

@@ -1,45 +1,40 @@
-# Add search paths.
-# ------------------
 include_directories(${TINYXML_INCLUDE_DIR})
 include_directories(${OPENNI_INCLUDE_DIR})
 include_directories("./FilesOnly")
 
-# Get sources for OpenNI
-# ----------------------
 file(GLOB OpenNI_sources ./*.cpp ./*.h ../../Include/*.h)
 
-# Add platform specific sources.
-# ------------------------------
 if(OPENNI_PLATFORM_LINUX)
-	file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
+    file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
 elseif(OPENNI_PLATFORM_APPLE)
-	file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
-	set(CMAKE_EXE_LINKER_FLAGS "-framework CoreFoundation -framework IOKit")
+    file(GLOB OpenNI_platform_sources ./Linux-x86/*.cpp)
+    set(OPENNI_PLATFORM_LIBS "-framework CoreFoundation -framework IOKit")
+elseif(OPENNI_PLATFORM_WIN32)
+    file(GLOB OpenNI_platform_sources ./WIN32/*.cpp)
+    set(OPENNI_PLATFORM_LIBS Ws2_32.lib Setupapi.lib)
+    include_directories(${OpenNI_SOURCE_DIR}/Platform/Win32/Driver/Build/sys)
+    add_definitions(-DXN_EXPORTS)
 endif()
 
-# Set our target
-# ---------------
 add_library(OpenNI SHARED 
-	${OpenNI_sources} 
-	${OpenNI_platform_sources}
+    ${OpenNI_sources}
+    ${OpenNI_platform_sources}
 )
 
 set_property(TARGET OpenNI PROPERTY LINK_INTERFACE_LIBRARIES "")
 
-# Set Link libraries.
-# -------------------
-find_library(LIBDL dl)
+if(UNIX)
+    find_library(LIBDL dl)
+endif()
+
 target_link_libraries(OpenNI
-        usb
-	${LIBDL} 
-	TinyXml
-#	${CMAKE_EXE_LINKER_FLAGS}
+    usb
+    ${LIBDL}
+    TinyXml
+    ${OPENNI_PLATFORM_LIBS}
 )
 
-# Set path where to install the target, lib, runtime. 
-# (to same dir where we call cmake ., as we use the "dot")
-# -----------------------------------------------------
 install(TARGETS OpenNI EXPORT openni-exports
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
+    RUNTIME DESTINATION bin
+    ARCHIVE DESTINATION lib
 )

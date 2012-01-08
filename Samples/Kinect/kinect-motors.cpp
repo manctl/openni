@@ -1,11 +1,21 @@
 // Forked from: https://groups.google.com/d/msg/openni-dev/T_CeVW_d8ig/dsBKONIpNyQJ
 
-// OpenNI includes
 #include <XnUSB.h>
-
-// Standard includes
 #include <cstdio>
-#include <time.h>
+
+#ifdef _WIN32
+#include <Windows.h>
+void pause ()
+{
+    Sleep(1000);
+}
+#else
+#include <unistd.h>
+void pause ()
+{
+    sleep(1);
+}
+#endif
 
 /**
  * Class to control Kinect's motor.
@@ -147,10 +157,10 @@ int main(int argc, char *argv[])
         return 1;
     
     motors.Move(31); // Move them up to 31 degree
-    sleep(1);
+    pause();
     
     motors.Move(-31); // Move them down to 31 degree.
-    sleep(1);
+    pause();
     
     motors.Move(0);
     return 0;

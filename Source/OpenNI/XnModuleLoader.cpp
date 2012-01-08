@@ -26,12 +26,15 @@
 
 #if MANCTL_CHANGES
 
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 #include <cstdlib>
 #include <iostream>
 
 const char* xn_modules_file = "config/modules.xml";
 
+#ifndef _WINDOWS
 inline std::string
 getWorkingDirectory ()
 {
@@ -40,11 +43,15 @@ getWorkingDirectory ()
     free(buf);
     return ret;
 }
+#endif
 
 void loadModuleHook (const char* module, const char* config)
 {
     std::cout << "DBG: Loading module: " << module << std::endl;
+
+#ifndef _WINDOWS
     std::cout << "DBG: Working directory: " << getWorkingDirectory() << std::endl;
+#endif
 }
 
 #endif

@@ -1,4 +1,3 @@
-#project(niLicense)
 set(LICENSE_EXE niLicense)
 
 file(GLOB ${LICENSE_EXE}_sources ./*.cpp)
