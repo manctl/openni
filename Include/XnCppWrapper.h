@@ -818,6 +818,29 @@ namespace xn
 		/// @copydoc OutputMetaData::WritableData
 		inline XnIRPixel* WritableData() { return (XnIRPixel*)MapMetaData::WritableData(); }
 
+		/**
+		 * Gets the value of the pixel
+		 *
+		 * @param	nIndex		[in]	The index of the pixel in the buffer.
+		 */
+		inline const XnIRPixel& operator[](XnUInt32 nIndex) const 
+		{ 
+			XN_ASSERT(nIndex < (XRes()*YRes()));
+			return Data()[nIndex]; 
+		}
+
+		/**
+		 * Gets the value of the pixel
+		 *
+		 * @param	x		[in]	X-coordinate of the pixel in the map
+		 * @param	y		[in]	Y-coordinate of the pixel in the map
+		 */
+		inline const XnIRPixel& operator()(XnUInt32 x, XnUInt32 y) const 
+		{
+			XN_ASSERT(x < XRes() && y < YRes());
+			return Data()[y*XRes() + x]; 
+		}
+
 		/// Gets a light object wrapping the IR map
 		inline const xn::IRMap& IRMap() const { return m_irMap; }
 		/// Gets a light object wrapping the writable IR map
@@ -1214,7 +1237,8 @@ namespace xn
 
 		/** @copybrief xnNodeInfoGetCreationInfo
 		 * For full details and usage, see @ref xnNodeInfoGetCreationInfo
-		 */		inline const XnChar* GetCreationInfo() const
+		 */		
+		inline const XnChar* GetCreationInfo() const
 		{
 			return xnNodeInfoGetCreationInfo(m_pInfo);
 		}
@@ -1239,6 +1263,14 @@ namespace xn
 		inline const void* GetAdditionalData() const
 		{
 			return xnNodeInfoGetAdditionalData(m_pInfo);
+		}
+
+		/** @copybrief xnNodeInfoGetTreeStringRepresentation
+		 * For full details and usage, see @ref xnNodeInfoGetTreeStringRepresentation
+		 */
+		inline XnStatus GetTreeStringRepresentation(XnChar* csResultBuffer, XnUInt32 nBufferSize) const
+		{
+			return xnNodeInfoGetTreeStringRepresentation(m_pInfo, csResultBuffer, nBufferSize);
 		}
 
 	private:
@@ -3477,6 +3509,15 @@ namespace xn
 		{
 			return xnEnumerateGestures(GetHandle(), &astrGestures, &nGestures);
 		}
+
+        /** @copybrief xnGetNumberOfAvailableGestures
+         * For full details and usage, see @ref xnGetNumberOfAvailableGestures
+         */
+        inline XnUInt16 GetNumberOfAvailableGestures() const
+        {
+            return xnGetNumberOfAvailableGestures(GetHandle());
+        }
+
 		/** @copybrief xnEnumerateAllGestures
 		 * For full details and usage, see @ref xnEnumerateAllGestures
 		 */
@@ -4584,6 +4625,16 @@ namespace xn
 			return xnGetAllAvailablePoses(GetHandle(), pstrPoses, nNameLength, &nPoses);
 		}
 
+        inline XnBool IsPoseSupported(const XnChar* strPose)
+        {
+            return xnIsPoseSupported(GetHandle(), strPose);
+        }
+
+        inline XnStatus GetPoseStatus(XnUserID userID, const XnChar* poseName, XnUInt64& poseTime, XnPoseDetectionStatus& eStatus, XnPoseDetectionState& eState)
+        {
+            return xnGetPoseStatus(GetHandle(), userID, poseName, &poseTime, &eStatus, &eState);
+        }
+
 		/** @copybrief xnStartPoseDetection
 		 * For full details and usage, see @ref xnStartPoseDetection
 		 */
@@ -4598,6 +4649,14 @@ namespace xn
 		inline XnStatus StopPoseDetection(XnUserID user)
 		{
 			return xnStopPoseDetection(GetHandle(), user);
+		}
+
+		/** @copybrief xnStopSinglePoseDetection
+		 * For full details and usage, see @ref xnStopSinglePoseDetection
+		 */
+		inline XnStatus StopSinglePoseDetection(XnUserID user, const XnChar* strPose)
+		{
+			return xnStopSinglePoseDetection(GetHandle(), user, strPose);
 		}
 
 		/** @copybrief xnRegisterToPoseCallbacks
@@ -5279,6 +5338,8 @@ namespace xn
 		 */
 		inline ScriptNode(XnNodeHandle hNode = NULL) : ProductionNode(hNode) {}
 		inline ScriptNode(const NodeWrapper& other) : ProductionNode(other) {}
+
+		inline XnStatus Create(Context& context, const XnChar* strFormat);
 
 		inline const XnChar* GetSupportedFormat()
 		{
@@ -6368,6 +6429,15 @@ namespace xn
 	inline XnStatus ScriptNode::Run(EnumerationErrors* pErrors)
 	{
 		return xnScriptNodeRun(GetHandle(), pErrors == NULL ? NULL : pErrors->GetUnderlying());
+	}
+
+	inline XnStatus ScriptNode::Create(Context& context, const XnChar* strFormat)
+	{
+		XnNodeHandle hNode;
+		XnStatus nRetVal = xnCreateScriptNode(context.GetUnderlyingObject(), strFormat, &hNode);
+		XN_IS_STATUS_OK(nRetVal);
+		TakeOwnership(hNode);
+		return (XN_STATUS_OK);
 	}
 
 	//---------------------------------------------------------------------------
