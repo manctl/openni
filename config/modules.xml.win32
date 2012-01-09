@@ -6,6 +6,14 @@
     <Module path="../bin/XnDeviceFile.dll"            configDir="config"/>
     <Module path="../bin/XnKinectDevicesSensorV2.dll" configDir="config"/>
     <Module path="../bin/XnKinectDeviceFile.dll"      configDir="config"/>
-    <Module path="../bin/XnVFeatures.dll"             configDir="config/XnVFeatures"/>
-    <Module path="../bin/XnVHandGenerator.dll"        configDir="config/XnVHandGenerator"/>
+    <Module path="../bin/XnVFeatures_1_3_0.dll"       configDir="../share/nite/data/Features_1_3_0"/>
+    <Module path="../bin/XnVFeatures_1_3_1.dll"       configDir="../share/nite/data/Features_1_3_1"/>
+    <Module path="../bin/XnVFeatures_1_4_1.dll"       configDir="../share/nite/data/Features_1_4_1"/>
+    <Module path="../bin/XnVFeatures_1_4_2.dll"       configDir="../share/nite/data/Features_1_4_2"/>
+    <Module path="../bin/XnVFeatures_1_5_2.dll"       configDir="../share/nite/data/Features_1_5_2"/>
+    <Module path="../bin/XnVHandGenerator_1_3_0.dll"  configDir="../share/nite/data/Hands_1_3_0"/>
+    <Module path="../bin/XnVHandGenerator_1_3_1.dll"  configDir="../share/nite/data/Hands_1_3_1"/>
+    <Module path="../bin/XnVHandGenerator_1_4_1.dll"  configDir="../share/nite/data/Hands_1_4_1"/>
+    <Module path="../bin/XnVHandGenerator_1_4_2.dll"  configDir="../share/nite/data/Hands_1_4_2"/>
+    <Module path="../bin/XnVHandGenerator_1_5_2.dll"  configDir="../share/nite/data/Hands_1_5_2"/>
 </Modules>

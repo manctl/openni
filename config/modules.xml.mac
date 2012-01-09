@@ -6,6 +6,14 @@
     <Module path="@loader_path/../lib/libXnDeviceFile.dylib"            configDir="config"/>
     <Module path="@loader_path/../lib/libXnKinectDevicesSensorV2.dylib" configDir="config"/>
     <Module path="@loader_path/../lib/libXnKinectDeviceFile.dylib"      configDir="config"/>
-    <Module path="@loader_path/../lib/libXnVFeatures.dylib"             configDir="config/XnVFeatures"/>
-    <Module path="@loader_path/../lib/libXnVHandGenerator.dylib"        configDir="config/XnVHandGenerator"/>
+    <Module path="@loader_path/../lib/libXnVFeatures_1_3_0.dylib"       configDir="../share/nite/data/Features_1_3_0"/>
+    <Module path="@loader_path/../lib/libXnVFeatures_1_3_1.dylib"       configDir="../share/nite/data/Features_1_3_1"/>
+    <Module path="@loader_path/../lib/libXnVFeatures_1_4_1.dylib"       configDir="../share/nite/data/Features_1_4_1"/>
+    <Module path="@loader_path/../lib/libXnVFeatures_1_4_2.dylib"       configDir="../share/nite/data/Features_1_4_2"/>
+    <Module path="@loader_path/../lib/libXnVFeatures_1_5_2.dylib"       configDir="../share/nite/data/Features_1_5_2"/>
+    <Module path="@loader_path/../lib/libXnVHandGenerator_1_3_0.dylib"  configDir="../share/nite/data/Hands_1_3_0"/>
+    <Module path="@loader_path/../lib/libXnVHandGenerator_1_3_1.dylib"  configDir="../share/nite/data/Hands_1_3_1"/>
+    <Module path="@loader_path/../lib/libXnVHandGenerator_1_4_1.dylib"  configDir="../share/nite/data/Hands_1_4_1"/>
+    <Module path="@loader_path/../lib/libXnVHandGenerator_1_4_2.dylib"  configDir="../share/nite/data/Hands_1_4_2"/>
+    <Module path="@loader_path/../lib/libXnVHandGenerator_1_5_2.dylib"  configDir="../share/nite/data/Hands_1_5_2"/>
 </Modules>

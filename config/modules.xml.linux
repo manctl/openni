@@ -6,6 +6,14 @@
     <Module path="$ORIGIN/../lib/libXnDeviceFile.so"            configDir="config"/>
     <Module path="$ORIGIN/../lib/libXnKinectDevicesSensorV2.so" configDir="config"/>
     <Module path="$ORIGIN/../lib/libXnKinectDeviceFile.so"      configDir="config"/>
-    <Module path="$ORIGIN/../lib/libXnVFeatures.so"             configDir="config/XnVFeatures"/>
-    <Module path="$ORIGIN/../lib/libXnVHandGenerator.so"        configDir="config/XnVHandGenerator"/>
+    <Module path="$ORIGIN/../lib/libXnVFeatures_1_3_0.so"       configDir="../share/nite/data/Features_1_3_0"/>
+    <Module path="$ORIGIN/../lib/libXnVFeatures_1_3_1.so"       configDir="../share/nite/data/Features_1_3_1"/>
+    <Module path="$ORIGIN/../lib/libXnVFeatures_1_4_1.so"       configDir="../share/nite/data/Features_1_4_1"/>
+    <Module path="$ORIGIN/../lib/libXnVFeatures_1_4_2.so"       configDir="../share/nite/data/Features_1_4_2"/>
+    <Module path="$ORIGIN/../lib/libXnVFeatures_1_5_2.so"       configDir="../share/nite/data/Features_1_5_2"/>
+    <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_3_0.so"  configDir="../share/nite/data/Hands_1_3_0"/>
+    <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_3_1.so"  configDir="../share/nite/data/Hands_1_3_1"/>
+    <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_4_1.so"  configDir="../share/nite/data/Hands_1_4_1"/>
+    <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_4_2.so"  configDir="../share/nite/data/Hands_1_4_2"/>
+    <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_5_2.so"  configDir="../share/nite/data/Hands_1_5_2"/>
 </Modules>
