@@ -1,10 +1,20 @@
 cmake_minimum_required(VERSION 2.8)
 
+project(OpenNI)
+
+if(UNIX AND CMAKE_SYSTEM_NAME MATCHES Linux)
+    set(LINUX ON)
+endif()
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(M64 ON)
+else()
+    set(M32 ON)
+endif()
+
 if(NOT DEFINED MANCTL_CHANGES)
     set(       MANCTL_CHANGES ON)
 endif()
-
-project(OpenNI)
 
 # Options
 # ---------
