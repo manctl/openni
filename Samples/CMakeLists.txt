@@ -9,14 +9,12 @@ if(WIN32)
         set(GLUT_DLL ${OpenNI_SOURCE_DIR}/Platform/Win32/Bin/Release/glut32.dll)
         set(GLUT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/NiViewer/Libs/glut32.lib)
     endif()
-    set(AUDIO_LIB winmm.lib)
+    list(APPEND EXTRA_LIBS ${GLUT_LIB} winmm.lib)
 else()
-    find_library(GLUT_LIB glut)
+    find_package(OpenGL REQUIRED)
+    find_package(GLUT REQUIRED)
+    list(APPEND EXTRA_LIBS ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${GLUT_glut_LIBRARY})
 endif()
-
-if(DEFINED OPENNI_PLATFORM_APPLE)
-    find_library(OPENGL_LIB OpenGL)
-endif(DEFINED OPENNI_PLATFORM_APPLE)
 
 #===============================================================================
 
@@ -24,7 +22,7 @@ file(GLOB NiAudioSample_SOURCES NiAudioSample/*.cpp)
 
 add_executable(NiAudioSample ${NiAudioSample_SOURCES})
 
-target_link_libraries(NiAudioSample OpenNI ${AUDIO_LIB})
+target_link_libraries(NiAudioSample OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -51,7 +49,7 @@ if(FALSE)
     
     add_executable(NiCRead ${NiCRead_SOURCES})
     
-    target_link_libraries(NiCRead OpenNI)
+    target_link_libraries(NiCRead OpenNI ${EXTRA_LIBS})
 endif()
 
 #-------------------------------------------------------------------------------
@@ -60,7 +58,7 @@ file(GLOB NiRecordSynthetic_SOURCES NiRecordSynthetic/*.cpp)
 
 add_executable(NiRecordSynthetic ${NiRecordSynthetic_SOURCES})
 
-target_link_libraries(NiRecordSynthetic OpenNI ${GLUT_LIB})
+target_link_libraries(NiRecordSynthetic OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -68,7 +66,7 @@ file(GLOB NiSampleModule_SOURCES NiSampleModule/*.cpp)
 
 add_library(NiSampleModule SHARED ${NiSampleModule_SOURCES})
 
-target_link_libraries(NiSampleModule OpenNI)
+target_link_libraries(NiSampleModule OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -76,7 +74,7 @@ file(GLOB NiSimpleCreate_SOURCES NiSimpleCreate/*.cpp)
 
 add_executable(NiSimpleCreate ${NiSimpleCreate_SOURCES})
 
-target_link_libraries(NiSimpleCreate OpenNI)
+target_link_libraries(NiSimpleCreate OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -84,7 +82,7 @@ file(GLOB NiSimpleRead_SOURCES NiSimpleRead/*.cpp)
 
 add_executable(NiSimpleRead ${NiSimpleRead_SOURCES})
 
-target_link_libraries(NiSimpleRead OpenNI)
+target_link_libraries(NiSimpleRead OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -92,7 +90,7 @@ file(GLOB NiSimpleViewer_SOURCES NiSimpleViewer/*.cpp)
 
 add_executable(NiSimpleViewer ${NiSimpleViewer_SOURCES})
 
-target_link_libraries(NiSimpleViewer OpenNI ${GLUT_LIB} ${OPENGL_LIB})
+target_link_libraries(NiSimpleViewer OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -103,7 +101,7 @@ if(FALSE)
     
     add_executable(NiUserTracker ${NiUserTracker_SOURCES})
     
-    target_link_libraries(NiUserTracker OpenNI ${GLUT_LIB} ${OPENGL_LIB})
+    target_link_libraries(NiUserTracker OpenNI ${EXTRA_LIBS})
 endif()
 
 #-------------------------------------------------------------------------------
@@ -114,7 +112,7 @@ include_directories(NiViewer)
 
 add_executable(NiViewer ${NiViewer_SOURCES})
 
-target_link_libraries(NiViewer OpenNI ${GLUT_LIB} ${OPENGL_LIB} ${AUDIO_LIB})
+target_link_libraries(NiViewer OpenNI ${EXTRA_LIBS})
 
 #-------------------------------------------------------------------------------
 
@@ -133,6 +131,7 @@ install(TARGETS
     NiSimpleRead
     NiSimpleViewer
     NiViewer
+    kinect-motors
 
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
