@@ -1,5 +1,8 @@
 include_directories(${OPENNI_INCLUDE_DIR})
 
+find_package(OpenGL REQUIRED)
+list(APPEND EXTRA_LIBS ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY})
+
 if(WIN32)
     # FIXME: Add glut as a proper dependency.
     if (CMAKE_CL_64)
@@ -11,9 +14,8 @@ if(WIN32)
     endif()
     list(APPEND EXTRA_LIBS ${GLUT_LIB} winmm.lib)
 else()
-    find_package(OpenGL REQUIRED)
     find_package(GLUT REQUIRED)
-    list(APPEND EXTRA_LIBS ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${GLUT_glut_LIBRARY})
+    list(APPEND EXTRA_LIBS ${GLUT_glut_LIBRARY})
 endif()
 
 #===============================================================================
