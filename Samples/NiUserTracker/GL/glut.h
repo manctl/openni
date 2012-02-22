@@ -45,10 +45,12 @@ typedef unsigned short wchar_t;
 #  endif
 # endif
 
+#if 0
 #pragma comment (lib, "winmm.lib")     /* link with Windows MultiMedia lib */
 #pragma comment (lib, "opengl32.lib")  /* link with Microsoft OpenGL lib */
 #pragma comment (lib, "glu32.lib")     /* link with OpenGL Utility lib */
 #pragma comment (lib, "glut32.lib")    /* link with Win32 GLUT lib */
+#endif
 
 #pragma warning (disable:4244)	/* Disable bogus conversion warnings. */
 #pragma warning (disable:4305)  /* VC++ 5.0 version of above warning. */
