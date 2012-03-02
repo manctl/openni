@@ -122,7 +122,7 @@ endif()
 
 foreach(dir . MacOSX Linux-x86 Linux-Arm Win32)
   file(GLOB HEADERS "Include/${dir}/*.h")
-  INSTALL(FILES ${HEADERS} DESTINATION include/${dir})
+  INSTALL(FILES ${HEADERS} DESTINATION include/ni/${dir})
 endforeach()
 
 install(DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/config DESTINATION bin/)
