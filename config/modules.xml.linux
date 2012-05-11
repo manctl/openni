@@ -2,10 +2,12 @@
     <Module path="$ORIGIN/../lib/libnimMockNodes.so" />
     <Module path="$ORIGIN/../lib/libnimCodecs.so" />
     <Module path="$ORIGIN/../lib/libnimRecorder.so" />
-    <Module path="$ORIGIN/../lib/libXnDevicesSensorV2.so"       configDir="config"/>
-    <Module path="$ORIGIN/../lib/libXnDeviceFile.so"            configDir="config"/>
-    <Module path="$ORIGIN/../lib/libXnKinectDevicesSensorV2.so" configDir="config"/>
-    <Module path="$ORIGIN/../lib/libXnKinectDeviceFile.so"      configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnDevicesSensorV2.so"        configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnDeviceFile.so"             configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnKinectDevicesSensorV2.so"  configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnKinectDeviceFile.so"       configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnKin4WinDevicesSensorV2.so" configDir="config"/>
+    <Module path="$ORIGIN/../lib/libXnKin4WinDeviceFile.so"      configDir="config"/>
     <Module path="$ORIGIN/../lib/libXnVFeatures_1_3_0.so"       configDir="../share/nite/data/Features_1_3_0"/>
     <Module path="$ORIGIN/../lib/libXnVFeatures_1_3_1.so"       configDir="../share/nite/data/Features_1_3_1"/>
     <Module path="$ORIGIN/../lib/libXnVFeatures_1_4_1.so"       configDir="../share/nite/data/Features_1_4_1"/>
@@ -17,3 +19,4 @@
     <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_4_2.so"  configDir="../share/nite/data/Hands_1_4_2"/>
     <Module path="$ORIGIN/../lib/libXnVHandGenerator_1_5_2.so"  configDir="../share/nite/data/Hands_1_5_2"/>
 </Modules>
+
