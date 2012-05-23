@@ -34,8 +34,12 @@ target_link_libraries(OpenNI
     ${OPENNI_PLATFORM_LIBS}
 )
 
+if(WIN32 AND M64)
+    set_property(TARGET OpenNI PROPERTY OUTPUT_NAME OpenNI64)
+endif()
+
 install(TARGETS OpenNI EXPORT openni-exports
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
-	LIBRARY DESTINATION lib
+    LIBRARY DESTINATION lib
 )
