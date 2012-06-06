@@ -45,7 +45,7 @@ set(CMAKE_INSTALL_RPATH ../lib)
 
 # Some global variables
 # ----------------------
-set(TINYXML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/External/TinyXml/")
+set(TINYXML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Externals/TinyXml/")
 set(OPENNI_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Include/")
 set(OPENNI_MODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source/Modules")
 
@@ -82,7 +82,7 @@ find_package(usb REQUIRED)
 
 # Use external libraries.
 # -----------------------
-add_subdirectory("Source/External/TinyXml/") # @todo only when lib was not found
+add_subdirectory("Externals/TinyXml/") # @todo only when lib was not found
 add_subdirectory("Source/OpenNI/")
 add_subdirectory("Source/Modules/")
 
