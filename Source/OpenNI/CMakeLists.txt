@@ -4,6 +4,8 @@ include_directories("./FilesOnly")
 
 file(GLOB OpenNI_sources ./*.cpp ./*.h ../../Include/*.h)
 
+add_definitions(-DXN_EXPORTS)
+
 if(OPENNI_PLATFORM_LINUX)
     file(GLOB OpenNI_platform_sources ./Linux/*.cpp)
 elseif(OPENNI_PLATFORM_APPLE)
@@ -13,13 +15,16 @@ elseif(OPENNI_PLATFORM_WIN32)
     file(GLOB OpenNI_platform_sources ./WIN32/*.cpp)
     set(OPENNI_PLATFORM_LIBS Ws2_32.lib Setupapi.lib)
     include_directories(${OpenNI_SOURCE_DIR}/Platform/Win32/Driver/Build/sys)
-    add_definitions(-DXN_EXPORTS)
 endif()
 
 add_library(OpenNI SHARED 
     ${OpenNI_sources}
     ${OpenNI_platform_sources}
 )
+
+if(UNIX)
+    set_property(TARGET OpenNI PROPERTY COMPILE_FLAGS "-fvisibility=hidden")
+endif()
 
 set_property(TARGET OpenNI PROPERTY LINK_INTERFACE_LIBRARIES "")
 
